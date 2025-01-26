@@ -6,10 +6,10 @@
     security_group: sg-0844feaeae9d1329b
     image_id: ami-09c813fb71547fc4f
     instance_type: t3.micro
-  instances:
-  - mysql1
-  - mysql2
-  - mysql3
+    instances:
+    - mysql1
+    - mysql2
+    - mysql3
 
   tasks:
   - name: create ec2 instances
