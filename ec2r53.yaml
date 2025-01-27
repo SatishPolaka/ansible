@@ -46,7 +46,7 @@
       record: "{{ item.item }}.{{ zone }}"
       type: A
       ttl: 1
-      value: 1.1.1.1,2.2.2.2,3.3.3.3
+      value: "{{ item.instances[0].private_ip_address }}"
       wait: true
       overwrite: true
     loop: "{{ ec2_info.results }}"
