@@ -11,6 +11,15 @@
     - backend
     - frontend
 
+  - name: install backend library
+  ansible.builtin.pip:
+    name: "{{ packages }}"
+    executable: pip3.9
+  vars:
+    packages:
+    - botocore
+    - boto3
+
   tasks:
   - name: create ec2 resources
     amazon.aws.ec2_instance:
