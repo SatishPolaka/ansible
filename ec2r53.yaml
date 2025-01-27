@@ -10,15 +10,12 @@
     - mysql
     - backend
     - frontend
-
   tasks:
-
   - name: install backend library
     ansible.builtin.pip:
-    name: "{{ packages }}"
-    executable: pip3.9
-  vars:
-    packages:
+      name: "{{ items }}"
+      executable: pip3.9
+    loop:
     - botocore
     - boto3
   - name: create ec2 resources
