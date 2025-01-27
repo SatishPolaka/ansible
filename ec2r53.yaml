@@ -6,6 +6,7 @@
     security_group: sg-0844feaeae9d1329b
     image_id: ami-09c813fb71547fc4f
     instance_type: t3.micro
+    zone: psrexpense.store
     instances:
     - mysql
     - backend
@@ -29,13 +30,25 @@
     register: ec2_info
 
 
-  - name: print ec2_info
-    ansible.builtin.debug:
-      msg: "{{ ec2_info }}"
+  # - name: print ec2_info
+  #   ansible.builtin.debug:
+  #     msg: "{{ ec2_info }}"
 
   - name: print ip adress
     ansible.builtin.debug:
       msg: "IP address of {{ item.item }} is {{ item.instances[0].private_ip_address }}"
+    loop: "{{ ec2_info.results }}"
+
+  - name: create r53 resource
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone }}"
+      record: "{{ item.item }}.{{ zone }}"
+      type: A
+      ttl: 1
+      value: 1.1.1.1,2.2.2.2,3.3.3.3
+      wait: true
+      overwrite: true
     loop: "{{ ec2_info.results }}"
 
   
