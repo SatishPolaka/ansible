@@ -12,7 +12,7 @@
     - frontend
 
   - name: install backend library
-  ansible.builtin.pip:
+    ansible.builtin.pip:
     name: "{{ packages }}"
     executable: pip3.9
   vars:
