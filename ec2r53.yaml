@@ -13,7 +13,7 @@
   tasks:
   - name: install backend library
     ansible.builtin.pip:
-      name: "{{ items }}"
+      name: "{{ item }}"
       executable: pip3.9
     loop:
     - botocore
